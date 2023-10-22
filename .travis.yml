@@ -10,7 +10,7 @@ script:
   - docker run bsikute/react-test npm test -- --coverage --watchAll=false
 
 after_success:
-  - travis_wait docker build -t bsikute/multi-client ./client
+  - docker build -t bsikute/multi-client ./client
   - docker build -t bsikute/multi-nginx ./nginx
   - docker build -t bsikute/multi-server ./server
   - docker build -t bsikute/multi-worker ./worker
