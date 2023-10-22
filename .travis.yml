@@ -13,3 +13,10 @@ after_success:
   - docker build -t bsikute/multi-nginx ./nginx
   - docker build -t bsikute/multi-server ./server
   - docker build -t bsikute/multi-worker ./worker
+  #Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take images and push them to docker hub
+  - docker push bsikute/multi-client
+  - docker push bsikute/multi-nginx
+  - docker push bsikute/multi-server
+  - docker push bsikute/multi-worker
