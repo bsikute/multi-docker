@@ -1,0 +1,15 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t bsikute/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true bsikute/react-test npm test
+
+after_success:
+  - docker build -t bsikute/multi-client ./client
+  - docker build -t bsikute/multi-nginx ./nginx
+  - docker build -t bsikute/multi-server ./server
+  - docker build -t bsikute/multi-worker ./worker
