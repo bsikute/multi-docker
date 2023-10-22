@@ -8,7 +8,7 @@ before_install:
   - docker build -t bsikute/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true bsikute/react-test npm test
+  - docker run bsikute/react-test npm test -- --coverage
 
 after_success:
   - docker build -t bsikute/multi-client ./client
