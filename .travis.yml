@@ -1,5 +1,4 @@
 sudo: required
-language: generic
 
 services:
   - docker
@@ -8,10 +7,10 @@ before_install:
   - docker build -t bsikute/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run bsikute/react-test npm test -- --coverage
+  - docker run bsikute/react-test npm test -- --coverage --watchAll=false
 
 after_success:
-  - docker build -t bsikute/multi-client ./client
+  - travis_wait docker build -t bsikute/multi-client ./client
   - docker build -t bsikute/multi-nginx ./nginx
   - docker build -t bsikute/multi-server ./server
   - docker build -t bsikute/multi-worker ./worker
